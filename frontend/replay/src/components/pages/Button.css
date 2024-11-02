@@ -1,7 +1,7 @@
 .button {
     display: flex; /* Make the button inline */
     font-size: 50px; /* Increase font size */
-    font-family: 'GravestoneDemo-4BPgx';
+    font-family: 'Arcade';
     margin-bottom: 30px;
     cursor: pointer; /* Pointer/hand icon */
     transition: background-color 0.3s ease; /* Transition for hover effect */
