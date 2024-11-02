@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 import { Button } from './Button.jsx'
+import GodotGame from './GodotGame';
 
 
 export const Home = () => {
@@ -24,6 +25,7 @@ export const Home = () => {
             </div>
             <div className="screen-border">
                 <div className="arcade-screen">
+                <GodotGame />
                   <div className="arcade-message">Do you wish you could play those old childhood videogames again?</div>
                   <div className="arcade-message"> With RePlay, you can!</div>
                   <div className="arcade-message"> Enter in any old or unwanted computer below!</div>
