@@ -1,0 +1,86 @@
+.active{
+    color: #005B41;
+} 
+
+nav .image {
+    height: 100px;
+    width: 100px;
+    margin-right: -750px;
+    margin-left: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    background: linear-gradient(90deg, #062A55 400px, #FDEE00 400px, #FDEE00 1400px, #062A55 400px);
+    font-family: 'GravestoneDemo-4BPgx';
+    height: 150px;
+    z-index: 1000;
+    margin-bottom: -30px;
+}
+
+nav .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 4rem;
+    text-decoration: none;
+    color: #005B41;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul.open {
+    display: flex;
+    background-color: white;
+    width: 100%;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 3rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
+nav ul li a:not(.active):hover {
+    color: #005B41;
+}
+
+nav ul li a.active:hover {
+    color: #005B41;
+}
+
+nav .title:hover {
+    color: #005B41;
+}
+
+nav .menu {
+    display: none;
+    position: absolute;
+    top: 1em;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+nav .menu span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: #D4AF37;
+    border-radius: 0.2rem;
+}
+

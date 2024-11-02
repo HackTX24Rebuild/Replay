@@ -1,0 +1,96 @@
+.home-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background: #7b7c7c;
+    padding-top: 100px; /* Adds space at the top of the container */
+    overflow-y: auto;
+    position: relative;
+}
+.arcade-top {
+    border: 10px solid #FDEE00;
+    width: 800px;
+    height: 200px;
+    display:flex;
+    background-color: black;
+}
+
+.arcade-bottom {
+    border: 10px solid #FDEE00;
+    width: 800px;
+    height: 100px;
+    display:flex;
+    background-color: #FDEE00;
+}
+
+.spacer {
+    height: 300px;
+    width: 1000px;
+    background-color: black;
+}
+
+.arcade-cabinet {
+    width: 830px;
+    height: 1200px;
+    justify-content: center;
+    display: flex;
+    background-color: #FDEE00;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center align items horizontally */
+}
+
+.screen-border {
+    width: 800px;
+    height: 800px;
+    justify-content: center;
+    display: flex;
+    background-color: black;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center align items horizontally */
+}
+
+.arcade-screen {
+    width: 700px;
+    height: 700px;
+    justify-content: center;
+    display: flex;
+    background-color: #0951FD;
+    border-radius: 100px;
+    border: 6px solid #FDEE00;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    
+    /* VHS effects */
+    filter: blur(0.8px) contrast(1.2);
+    text-shadow: 
+        -2px 0 red, 
+        2px 0 cyan;
+    box-shadow: 
+        0 0 40px 15px rgba(9, 81, 253, 0.8), 
+        inset 0 0 60px rgba(9, 81, 253, 0.6),
+        0 0 80px 30px rgba(9, 81, 253, 0.5);
+
+    /* Scan lines */
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.05) 50%, 
+        transparent 50%
+    );
+    background-size: 100% 4px;
+    
+    /* Overlay noise effect */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('./src/assets/vhs.png'); /* Base64-encoded noise image */
+        opacity: 0.1;
+        pointer-events: none;
+    }
+}
