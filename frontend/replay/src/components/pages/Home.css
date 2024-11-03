@@ -11,6 +11,15 @@
     position: relative;
 }
 
+.secret {
+    position: absolute;
+    background-image: url(./src/assets/secret.png);
+    background-size: contain; /* Makes the image fit within the container while maintaining aspect ratio */
+    height: 300px;
+    width: 300px;
+    left: 1250px;
+}
+
 .game {
     width: 700px;
     height: 700px;

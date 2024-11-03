@@ -35,6 +35,7 @@ export const Home = () => {
 
   return (
     <div className="home-background">
+      <div className="secret"></div>
       <div className="overlay"></div>
         <div className="left-cabinet">
           <div className="left-top">
