@@ -1,5 +1,4 @@
 import { React, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import './Home.css'
 import { Button } from './Button.jsx'
 import GodotGame from './GodotGame';
@@ -12,7 +11,6 @@ export const Home = () => {
   const [isSecret2, setIsSecret2] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleStart = () => {
     if (!inputValue) {
@@ -46,6 +44,15 @@ export const Home = () => {
             <div className="left-screen"></div>
           </div>
           <div className="left-bottom">
+            <div className="arcade-button" style ={{backgroundColor: 'black'}}>
+                <Button/>
+              </div>
+              <div className="arcade-button2" style ={{backgroundColor: 'black'}}>
+                <Button/>
+              </div>
+              <div className="arcade-button3" style ={{backgroundColor: 'black'}}>
+                <Button/>
+              </div>              
           </div>
         </div>
         <div className="right-cabinet">
@@ -65,7 +72,7 @@ export const Home = () => {
               <div className="arcade-screen">
               {isSecret1 && isSecret2 ? (
                   <div className="game">
-                    {/* New content for the game stage when both secrets are true */}
+                    {<GodotGame/>}
                   </div>
                 ) : isStarted ? (
                   <div className="game-content">
