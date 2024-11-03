@@ -8,6 +8,7 @@ import start from '/src/assets/start.mp3'
 import end from '/src/assets/end.mp3'
 import button from '/src/assets/button.mp3'
 import joystick from '/src/assets/joystick.mp3'
+import axios from 'axios'; // Ensure you have axios imported
 
 
 export const Home = () => {
@@ -22,6 +23,27 @@ export const Home = () => {
   const [isSecret2, setIsSecret2] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [items, setItems] = useState([]); // To store responses from the API
+
+  const fetchResponse = async (message) => {
+    if (!message) return; // Ensure input exists
+
+    try {
+      const response = await axios.post('http://localhost:5001/api/chat', {
+        message: message,
+      });
+
+      const content = response.data.content;
+      const parsedItems = content
+        .split('\n')
+        .filter(item => item.trim() !== '') // Split response into items and filter out empty items
+        .map(item => item.slice(2).trim()); // Remove the first character and trim spaces
+
+      setItems(parsedItems);
+    } catch (error) {
+      console.error('Error fetching response from backend:', error);
+    }
+  };
 
   const handleStart = () => {
     if (!inputValue) {
@@ -29,6 +51,7 @@ export const Home = () => {
       return;
     }
     playReplay();
+    fetchResponse(inputValue); // Call fetchResponse with the inputValue
     setIsStarted(true);
   };
 
@@ -121,6 +144,26 @@ export const Home = () => {
                         <div className="segment segment2"></div>
                         <div className="segment segment3"></div>
                         <div className="segment segment4"></div>
+                      </div>
+                      <div className="arcade-message">CPU</div>
+                      <div className="stat-bar">
+                        <div className="segment segment1"></div>
+                        <div className="segment segment2"></div>
+                        <div className="segment segment3"></div>
+                        <div className="segment segment4"></div>
+                      </div>
+                      <div className="arcade-message">GPU</div>
+                      <div className="stat-bar">
+                        <div className="segment segment1"></div>
+                        <div className="segment segment2"></div>
+                        <div className="segment segment3"></div>
+                        <div className="segment segment4"></div>
+                      </div>
+                      <div className="arcade-message">RAM</div>
+                      <div className="response-items">
+                        {items.map((item, index) => (
+                          <div key={index} className="response-item">{item}</div>
+                        ))}
                       </div>
                   </div>
                 ) : (
