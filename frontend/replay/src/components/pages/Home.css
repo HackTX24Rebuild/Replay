@@ -6,10 +6,65 @@
     height: auto;
     width: 100%;
     background-image: url('./src/assets/background.png');
+    background-color: white;
     overflow-y: hidden;
     overflow-x: hidden;
     position: relative;
 }
+
+.computer-info {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    font-family: 'Arcade 2';
+}
+
+.stat-bar {
+    position: relative; /* Positioning context for the segments */
+    width: 400px; /* Width of the stat bar */
+    height: 30px; /* Height of the stat bar */
+    border: 4px solid white; /* Border color */
+    border-radius: 100px; /* Rounded edges */
+    background-color: rgba(255, 255, 255, 0.2); /* Optional background color */
+}
+
+.segment {
+    position: absolute; /* Positioning segments absolutely */
+    height: 100%; /* Full height of the stat bar */
+    border-right: 4px solid white; /* Right border for separation */
+}
+
+.segment1 {
+    width: 20%; /* Width for the first segment */
+    left: 0; /* Align to the left */
+}
+
+.segment2 {
+    width: 20%; /* Width for the second segment */
+    left: 20%; /* Position after the first segment */
+}
+
+.segment3 {
+    width: 20%; /* Width for the third segment */
+    left: 40%; /* Position after the second segment */
+}
+
+.segment4 {
+    width: 20%; /* Width for the fourth segment */
+    left: 60%; /* Position after the third segment */
+}
+
+
+
+.esc-msg {
+    margin-top: 640px;
+    text-align: center;
+    position: absolute;
+    font-size: 30px;
+    color: white;
+    font-family: 'Arcade 2';
+}
+
 
 .secret {
     position: absolute;
@@ -26,7 +81,6 @@
     justify-content: center;
     display: flex;
     border-radius: 100px;
-    z-index: 1;
     flex-direction: column;
     align-items: center;
 }

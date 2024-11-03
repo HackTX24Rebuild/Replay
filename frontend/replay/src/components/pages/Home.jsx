@@ -1,10 +1,21 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import './Home.css'
 import { Button } from './Button.jsx'
 import GodotGame from './GodotGame';
+import useSound from 'use-sound';
+import replay from '/src/assets/replay.mp3'
+import start from '/src/assets/start.mp3'
+import end from '/src/assets/end.mp3'
+import button from '/src/assets/button.mp3'
+import joystick from '/src/assets/joystick.mp3'
 
 
 export const Home = () => {
+  const [playEnd] = useSound(end, { preload: true });
+  const [playReplay] = useSound(replay, { preload: true});
+  const [playStart] = useSound(start, { preload: true});
+  const [playButton] = useSound(button, { preload: true});
+  const [playJoystick] = useSound(joystick, { preload: true}); 
 
   const [isStarted, setIsStarted] = useState(false);
   const [isSecret1, setIsSecret1] = useState(false);
@@ -17,15 +28,19 @@ export const Home = () => {
       setErrorMessage('INPUT CANNOT BE BLANK');
       return;
     }
+    playReplay();
     setIsStarted(true);
   };
 
   const handleSecret1 = () => {
+    playButton();
     setIsSecret1(true);
   };
 
   const handleSecret2 = () => {
+    playJoystick();
     setIsSecret2(true);
+    playStart();
   };
 
   const handleInputChange = (e) => {
@@ -33,8 +48,25 @@ export const Home = () => {
     setErrorMessage(''); // Clear the error message when the user types
   };
 
+  useEffect(() => {
+    const handleMessage = (event) => {
+      playEnd();
+      if (event.data === 'exitGame') {
+        setIsSecret1(false);
+        setIsSecret2(false);
+      }
+    };
+  
+    window.addEventListener('message', handleMessage);
+  
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
+
   return (
-    <div className="home-background">
+    <div className="home-background" tabIndex="0">
       <div className="secret"></div>
       <div className="overlay"></div>
         <div className="left-cabinet">
@@ -64,6 +96,9 @@ export const Home = () => {
             <div className="right-screen"></div>
           </div>
           <div className="right-botton"></div>
+          <div className="joystick">
+                <div className="ball" onClick={handleSecret2}></div>
+              </div>
         </div>
         <div className="arcade-cabinet">
             <div className="arcade-top">
@@ -73,11 +108,20 @@ export const Home = () => {
               <div className="arcade-screen">
               {isSecret1 && isSecret2 ? (
                   <div className="game">
-                    {<GodotGame/>}
+                    {
+                      <GodotGame />
+                    }
+                  <div className="esc-msg">Press ESC to Exit</div>  
                   </div>
                 ) : isStarted ? (
-                  <div className="game-content">
-                    {/* New content for the game stage when the game has started */}
+                  <div className="game">
+                      <div className="computer-info">{inputValue}</div>
+                      <div className="stat-bar">
+                        <div className="segment segment1"></div>
+                        <div className="segment segment2"></div>
+                        <div className="segment segment3"></div>
+                        <div className="segment segment4"></div>
+                      </div>
                   </div>
                 ) : (
                   <>

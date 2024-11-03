@@ -106,6 +106,12 @@ const engine = new Engine(GODOT_CONFIG);
 	const statusProgress = document.getElementById('status-progress');
 	const statusNotice = document.getElementById('status-notice');
 
+	window.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			window.parent.postMessage('exitGame', '*'); // Replace '*' with a specific origin if needed
+		}
+	});
+
 	let initializing = true;
 	let statusMode = '';
 

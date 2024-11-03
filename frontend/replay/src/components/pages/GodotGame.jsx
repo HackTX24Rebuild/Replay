@@ -1,6 +1,7 @@
-import React from 'react';
+import { React } from 'react';
 
 const GodotGame = () => {
+  
   return (
     <iframe
       title="Godot Game"
