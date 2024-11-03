@@ -77,7 +77,7 @@ export const Home = () => {
       const content = response.data.content;
       const parsedItems = content
         .split(',') // Split the response by commas
-        .map(emulator => console.trim());
+        .map(emulator => emulator.trim());
 
       setEmulators(parsedItems);
     } catch (error) {
