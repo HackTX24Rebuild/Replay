@@ -24,6 +24,8 @@ export const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [items, setItems] = useState([]); // To store responses from the API
+  const [consoles, setConsoles] = useState([]);
+  const [emulators, setEmulators] = useState([]);
 
   const fetchResponse = async (message) => {
     if (!message) return; // Ensure input exists
@@ -35,13 +37,73 @@ export const Home = () => {
 
       const content = response.data.content;
       const parsedItems = content
-        .split('\n')
-        .filter(item => item.trim() !== '') // Split response into items and filter out empty items
-        .map(item => item.slice(2).trim()); // Remove the first character and trim spaces
+        .split(',') // Split the response by commas
+        .map(item => parseInt(item.trim(), 10)) // Convert strings to integers
+        .filter(item => !isNaN(item)); // Filter out non-numeric items
 
       setItems(parsedItems);
     } catch (error) {
       console.error('Error fetching response from backend:', error);
+    }
+  };
+
+  const fetchResponse2 = async (message) => {
+    if (!message) return; // Ensure input exists
+
+    try {
+      const response = await axios.post('http://localhost:5001/api/chat', {
+        message: message,
+      });
+
+      const content = response.data.content;
+      const parsedItems = content
+        .split(',') // Split the response by commas
+        .map(console => console.trim());
+
+      setConsoles(parsedItems);
+    } catch (error) {
+      console.error('Error fetching response from backend:', error);
+    }
+  };
+
+  const fetchResponse3 = async (message) => {
+    if (!message) return; // Ensure input exists
+
+    try {
+      const response = await axios.post('http://localhost:5001/api/chat', {
+        message: message,
+      });
+
+      const content = response.data.content;
+      const parsedItems = content
+        .split(',') // Split the response by commas
+        .map(emulator => console.trim());
+
+      setEmulators(parsedItems);
+    } catch (error) {
+      console.error('Error fetching response from backend:', error);
+    }
+  };
+
+  const getColorForRating = (rating) => {
+    switch (rating) {
+      case 1: return 'red';
+      case 2: return 'red';
+      case 3: return 'yellow';
+      case 4: return 'green';
+      case 5: return 'green';
+      default: return 'gray'; // For any unexpected values
+    }
+  };
+
+  const getWidthForRating = (rating) => {
+    switch (rating) {
+      case 1: return '20';
+      case 2: return '40%';
+      case 3: return '60%';
+      case 4: return '80%';
+      case 5: return '100%';
+      default: return 'grey'; // For any unexpected values
     }
   };
 
@@ -51,7 +113,14 @@ export const Home = () => {
       return;
     }
     playReplay();
-    fetchResponse(inputValue); // Call fetchResponse with the inputValue
+
+    const appendedInputValue = `Tell me the rating of the CPU, GPU, and RAM of the ${inputValue} on a scale of 1 to 5. Just give numbers in order.`;
+    const appendedInputValue2 = `Tell me the top 3 consoles (if emulated) that could be played ${inputValue}. Just give the names of the consoles. No description, no list. No period.`;
+    const appendedInputValue3 = `Tell me the top 3 emulators that could be downloaded for ${inputValue}. Just give the names of the emulators. No description, no list. No period.`;
+
+    fetchResponse(appendedInputValue); // Call fetchResponse with the inputValue
+    fetchResponse2(appendedInputValue2);
+    fetchResponse3(appendedInputValue3);
     setIsStarted(true);
   };
 
@@ -140,6 +209,11 @@ export const Home = () => {
                   <div className="game">
                       <div className="computer-info">{inputValue}</div>
                       <div className="stat-bar">
+                        <div className="bar" style={{
+                          backgroundColor: getColorForRating(items[0]),
+                          width: getWidthForRating(items[0]),
+                        }}> 
+                        </div>
                         <div className="segment segment1"></div>
                         <div className="segment segment2"></div>
                         <div className="segment segment3"></div>
@@ -147,6 +221,11 @@ export const Home = () => {
                       </div>
                       <div className="arcade-message">CPU</div>
                       <div className="stat-bar">
+                        <div className="bar" style={{
+                          backgroundColor: getColorForRating(items[1]),
+                          width: getWidthForRating(items[1]),
+                        }}> 
+                        </div>
                         <div className="segment segment1"></div>
                         <div className="segment segment2"></div>
                         <div className="segment segment3"></div>
@@ -154,17 +233,29 @@ export const Home = () => {
                       </div>
                       <div className="arcade-message">GPU</div>
                       <div className="stat-bar">
+                      <div className="bar" style={{
+                          backgroundColor: getColorForRating(items[1]),
+                          width: getWidthForRating(items[1]),
+                        }}> 
+                        </div>                        
                         <div className="segment segment1"></div>
                         <div className="segment segment2"></div>
                         <div className="segment segment3"></div>
                         <div className="segment segment4"></div>
                       </div>
                       <div className="arcade-message">RAM</div>
-                      <div className="response-items">
-                        {items.map((item, index) => (
-                          <div key={index} className="response-item">{item}</div>
+                      <div className="computer-info2">Playable Consoles</div>
+                      <ul className="arcade-list">
+                        {consoles.map((console, index) => (
+                          <li key={index}>{console}</li>
                         ))}
-                      </div>
+                      </ul>
+                      <div className="computer-info2">Emulators</div>
+                      <ul className="arcade-list">
+                        {emulators.map((emulator, index) => (
+                          <li key={index}>{emulator}</li>
+                        ))}
+                      </ul>
                   </div>
                 ) : (
                   <>
