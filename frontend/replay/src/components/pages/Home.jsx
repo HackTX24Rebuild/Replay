@@ -79,13 +79,20 @@ export const Home = () => {
         setIsSecret2(false);
       }
     };
+      const handleKeyDown = (event) => {
+        if (event.key === 'Escape' && isSecret1 && isSecret2) {
+          playEnd();
+        }
+    };
   
     window.addEventListener('message', handleMessage);
+    window.addEventListener('keydown', handleKeyDown);
   
     return () => {
       window.removeEventListener('message', handleMessage);
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [isSecret1, isSecret2, playEnd]);
 
 
   return (
