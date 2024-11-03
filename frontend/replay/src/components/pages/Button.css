@@ -1,19 +1,68 @@
 .button {
-    display: flex; /* Make the button inline */
-    font-size: 50px; /* Increase font size */
-    font-family: 'Arcade';
-    margin-bottom: 30px;
-    cursor: pointer; /* Pointer/hand icon */
-    transition: background-color 0.3s ease; /* Transition for hover effect */
-    background: none;
-    border: none;
-    color: black;
-    justify-content: center; /* Center horizontally */
-    align-items: center;
-    height: 100px; /* Set a fixed height */
-    width: 300px; /* Set a fixed width for testing */
+  display: flex; /* Make the button inline */
+  font-size: 50px; /* Increase font size */
+  font-family: 'Arcade';
+  margin-bottom: 30px;
+  cursor: pointer; /* Pointer/hand icon */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+  background: none;
+  border: none;
+  color: white;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  height: 100px; /* Set a fixed height */
+  width: 500px; /* Set a fixed width for testing */
+  animation: flash 1.3s infinite; /* Add flashing animation */
+}
+
+/* Keyframe for flashing effect */
+@keyframes flash {
+  0% {
+      opacity: 1; /* Fully visible */
   }
+  50% {
+      opacity: 0; /* Half visible */
+  }
+  100% {
+      opacity: 1; /* Back to fully visible */
+  }
+}
 
 .button:hover {
-  color:white;
+  color: white;
+  animation: none; /* Stop the flashing animation on hover */
+}
+
+.arcade-button {
+  margin: 0;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: red;
+  border-radius: 50%;
+  left: 550px;
+  margin-top: 60px;
+}
+
+.arcade-button2 {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  left: 625px;
+  margin-top: 120px;
+}
+.arcade-button3 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  left: 475px;
+  margin-top: 120px;
 }
