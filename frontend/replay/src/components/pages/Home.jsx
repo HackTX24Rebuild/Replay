@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 import { Button } from './Button.jsx'
+import GodotGame from './GodotGame';
 
 
 export const Home = () => {
